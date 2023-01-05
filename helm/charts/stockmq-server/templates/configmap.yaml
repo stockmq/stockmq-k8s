@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "stockmq-server.fullname" . }}
+  labels:
+    {{- include "stockmq-server.labels" . | nindent 4 }}
+data:
+  config.xml: |-
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Config>  
+      <Logger>
+          <Debug>{{ .Values.config.logger.debug }}</Debug>
+      </Logger>
+
+      <Monitor>
+          <Bind>0.0.0.0:{{ .Values.service.port }}</Bind>
+          <TLS>false</TLS>
+          <TLSCertificate>./certs/leaf.pem</TLSCertificate>
+          <TLSKey>./certs/leaf.key</TLSKey>
+          <Header Name="Access-Control-Allow-Origin">*</Header>
+          <Header Name="Access-Control-Allow-Headers">Origin, X-Requested-With, Content-Type, Accept</Header>
+      </Monitor>
+
+      <GRPC>
+          <Bind>0.0.0.0:9101</Bind>
+          <TLS>false</TLS>
+          <TLSCertificate>./certs/leaf.pem</TLSCertificate>
+          <TLSKey>./certs/leaf.key</TLSKey>
+      </GRPC>
+
+      <NATS>
+          <Name>StockMQ</Name>
+          <URL>{{ .Values.config.nats.url }}</URL>
+          <RetryDelay>{{ .Values.config.nats.retryDelay }}</RetryDelay>
+          <NoReconnect>{{ .Values.config.nats.noReconnect }}</NoReconnect>
+      </NATS>
+
+      {{- range $v := .Values.config.websocket }}
+      <WebSocket>
+          <Name>{{ $v.name }}</Name>
+          <Enabled>true</Enabled>
+          <URL>{{ $v.url }}</URL>
+          <Handler>{{ $v.handler }}</Handler>
+          <DialTimeout>{{ $v.dialTimeout }}</DialTimeout>
+          <RetryDelay>{{ $v.retryDelay }}</RetryDelay>
+          <PingTimeout>{{ $v.pingTimeout }}</PingTimeout>
+          <ReadLimit>{{ $v.readLimit }}</ReadLimit>
+          <InitMessage>{{ $v.initMessage }}</InitMessage>
+      </WebSocket>
+      {{- end }}
+    </Config>

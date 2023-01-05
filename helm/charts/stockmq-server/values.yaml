@@ -80,3 +80,22 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# Server configuration
+config:
+  logger:
+    debug: false
+  nats:
+    url: nats://nats:4222
+    retryDelay: 5
+    noReconnect: false
+  websocket:
+  #  - name: Binance-BTCUSD
+  #    url: wss://stream.binance.com:9443/ws
+  #    handler: Binance
+  #    dialTimeout: 4
+  #    retryDelay: 3
+  #    pingTimeout: 60
+  #    readLimit: 655350
+  #    initMessage: >-
+  #      {"id": 0, "method": "SUBSCRIBE", "params": ["btcusdt@kline_1s", "btcusdt@depth"]}

@@ -27,12 +27,20 @@ spec:
       serviceAccountName: {{ include "stockmq-server.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "stockmq-server.fullname" . }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: [ "-c", "/etc/config/config.xml" ]
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/config
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
