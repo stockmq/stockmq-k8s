@@ -3,6 +3,16 @@ entries:
   stockmq-server:
   - apiVersion: v2
     appVersion: v0.1.4
+    created: "2023-01-05T06:58:38.533050073Z"
+    description: A Helm chart for Kubernetes
+    digest: da68823d94812bfae859cc0ea602d211ee0028d352df57b4783c437a93c0b352
+    name: stockmq-server
+    type: application
+    urls:
+    - https://github.com/stockmq/stockmq-k8s/releases/download/stockmq-server-0.1.4/stockmq-server-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: v0.1.4
     created: "2023-01-05T06:19:48.169810183Z"
     description: A Helm chart for Kubernetes
     digest: 6b3cb70d4902307ef9a905fa19ad653102e0b30a1ceb3363127a9d6e88427174
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/stockmq/stockmq-k8s/releases/download/stockmq-server-0.1.0/stockmq-server-0.1.0.tgz
     version: 0.1.0
-generated: "2023-01-05T06:19:48.169815284Z"
+generated: "2023-01-05T06:58:38.533068173Z"
