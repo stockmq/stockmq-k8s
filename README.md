@@ -10,8 +10,7 @@ In this repo you can find the Helm 3 based [charts](https://github.com/stockmq/s
 > helm repo update
 
 > helm repo list
-NAME   	URL                                               
-nats   	https://nats-io.github.io/k8s/helm/charts/        
+NAME   	URL                                                    
 stockmq	https://stockmq.github.io/stockmq-k8s/helm/charts/
 
 > helm install stockmq stockmq/stockmq-server
