@@ -22,26 +22,6 @@ In this repo you can find the Helm 3 based [charts](https://github.com/stockmq/s
 > helm repo list
 NAME   	URL                                                    
 stockmq	https://stockmq.github.io/stockmq-k8s/helm/charts/
-
-> helm install stockmq stockmq/stockmq-server
-```
-
-## Verify installation
-
-Run these commands:
-
-```sh
-> kubectl get pods
-NAME                                      READY   STATUS    RESTARTS   AGE
-nats-0                                    3/3     Running   0          4m53s
-nats-box-75695747f9-56mtf                 1/1     Running   0          4m53s
-stockmq-stockmq-server-7956df8494-jrlxv   1/1     Running   0          4m15s
-
-> kubectl logs stockmq-stockmq-server-7956df8494-jrlxv
-2023/01/27 11:05:44 [INF] Starting StockMQ Server
-2023/01/27 11:05:44 [INF] Starting Monitor on 0.0.0.0:9100 tls: false
-2023/01/27 11:05:44 [INF] Starting GRPC on 0.0.0.0:9101 tls: false
-2023/01/27 11:05:44 [INF] Starting NATS connection to nats://nats:4222
 ```
 
 ## Add Binance stream
@@ -60,6 +40,30 @@ config:
       readLimit: 655350
       initMessage: >-
         {"id": 0, "method": "SUBSCRIBE", "params": ["btcusdt@kline_1s", "btcusdt@depth"]}
+```
+
+Install StockMQ Server using the helm chart.
+
+```
+> helm install -f values.yaml stockmq stockmq/stockmq-server
+```
+
+## Verify installation
+
+Run these commands:
+
+```sh
+> kubectl get pods
+NAME                                      READY   STATUS    RESTARTS   AGE
+nats-0                                    3/3     Running   0          4m53s
+nats-box-75695747f9-56mtf                 1/1     Running   0          4m53s
+stockmq-stockmq-server-7956df8494-jrlxv   1/1     Running   0          4m15s
+
+> kubectl logs stockmq-stockmq-server-7956df8494-jrlxv
+2023/01/27 11:05:44 [INF] Starting StockMQ Server
+2023/01/27 11:05:44 [INF] Starting Monitor on 0.0.0.0:9100 tls: false
+2023/01/27 11:05:44 [INF] Starting GRPC on 0.0.0.0:9101 tls: false
+2023/01/27 11:05:44 [INF] Starting NATS connection to nats://nats:4222
 ```
 
 ## Subscribe to Binance stream
