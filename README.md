@@ -64,6 +64,7 @@ stockmq-stockmq-server-7956df8494-jrlxv   1/1     Running   0          4m15s
 2023/01/27 11:05:44 [INF] Starting Monitor on 0.0.0.0:9100 tls: false
 2023/01/27 11:05:44 [INF] Starting GRPC on 0.0.0.0:9101 tls: false
 2023/01/27 11:05:44 [INF] Starting NATS connection to nats://nats:4222
+2023/01/27 11:05:44 [INF] Starting WebSocket connection Binance-BTCUSD (wss://stream.binance.com:9443/ws)
 ```
 
 ## Subscribe to Binance stream
